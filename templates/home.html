@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Movie Recommender</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+
+        header
+        {
+            position:fixed;
+            width:100%;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            margin-right: 0px;
+            margin-left: 0px;
+            background-color:#231F20;
+            text-align:center;
+            font-color:white;
+            font-family:Calibri;
+            font-size:20px;
+            padding: 0px;
+            top:0;
+            left:0;
+            z-index:10
+        }
+
+        button
+           {
+              display:inline;
+              border-radius:4px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 22px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 20px;
+              margin: 4px, 4px;
+              margin-top:auto;
+              transition-duration: 0.4s;
+              cursor: pointer;
+              background:#231F20;
+              margin-right:86px;
+              margin-top:25px;
+              float:right;
+           }
+
+           button:hover
+           {
+              border-radius:4px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 22px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 20px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+              background:#231F20;
+              margin-right:86px;
+              margin-top:25px;
+              float:right;
+           }
+
+       body
+       {
+           margin:0;
+           margin-top:100px
+       }
+
+       td img:hover
+       {
+          transform: scale(1.05);
+       }
+
+       input
+       {
+            padding:15px;
+            width:20%;
+            margin-top:15px;
+            background-color:white;
+            border-radius:25px;
+            font-size:15px;
+            margin-left:60px;
+       }
+
+       input:focus
+       {
+            background-color:white;
+            width:30%;
+            font-size:15px;
+            border-radius:25px;
+            margin-left:30px;
+       }
+
+       imgheader
+       {
+            margin-top:5px;
+            display:inline;
+       }
+
+    </style>
+</head>
+
+<body bgcolor=black>
+
+
+    <header>
+        <img class="imgheader" src="static/tmr.png" height="90px" width="140px" align="left">
+
+        <form action="{{url_for('search_description')}}" method="POST" style="display:inline">
+            <input type="search" placeholder="Search a Movie" name="movie_name" autocomplete="off">
+
+        </form>
+        <a href="{{url_for('images')}}"><button class="button">Refresh</button></a>
+    </header>
+
+    <table style="width:90%" align="center" cellpadding="15px">
+        <tr>
+            <td colspan="4"><h1 style="color :White">Popular Movies: You may like</h1></td>
+        </tr>
+        {% set count = namespace(value=0) %}
+        {% for i in range(5) %}
+            <tr style="height:100px,width:40px">
+                    {% for i in range(4) %}
+                        <td><a href="/description/{{lists[count.value].index}}" border="0"><img src={{lists[count.value].link}}, height = 450px, width = 350px, border = 0px></a> </td>
+                        {% set count.value = count.value + 1 %}
+                    {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

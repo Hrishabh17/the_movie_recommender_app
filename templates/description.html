@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>The Movie Recommender</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <style>
+
+           .button
+           {
+              border-radius:20px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 22px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 20px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: pointer;
+              background:#231F20;
+              margin-right:6px;
+           }
+
+           .button:hover
+           {
+              border-radius:20px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 22px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 20px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:6px;
+           }
+
+           .button2
+           {
+              border-radius:9px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 25px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:6px;
+              width:800px;
+           }
+
+           .button2:hover
+           {
+              border-radius:9px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 25px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:6px;
+              width:800px;
+           }
+
+           .button3
+           {
+              border-radius:35px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 35px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:6px;
+              width:800px;
+           }
+
+           .button3:hover
+           {
+              border-radius:35px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 35px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:6px;
+              width:800px;
+           }
+
+           .button4
+           {
+              border-radius:15px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 15px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:16px;
+
+           }
+
+           .button4:hover
+           {
+              border-radius:15px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 15px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-right:16px;
+           }
+
+           .button5
+           {
+              z-index:11;
+              position:fixed;
+              border-radius:15px;
+              border: 1px solid white;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 15px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-left:20px;
+
+           }
+
+           .button5:hover
+           {
+              z-index:11;
+              position:fixed;
+              border-radius:15px;
+              border: 1px solid #008cba;
+              color: White;
+              padding: 8px 15px;
+              text-align: center;
+              text-decoration: none;
+              display: inline-block;
+              font-size: 15px;
+              margin: 4px, 4px;
+              transition-duration: 0.4s;
+              cursor: default;
+              background:#231F20;
+              margin-left:20px;
+           }
+
+           @font-face
+           {
+              font-family: myfont;
+              font-style: normal;
+              font-weight: 400;
+              font-display: swap;
+              src: url(https://fonts.gstatic.com/s/roboto/v29/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+              unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+           }
+
+            header
+            {
+                position:fixed;
+                width:100%;
+                margin-top: 0px;
+                margin-bottom: 0px;
+                margin-right: 0px;
+                margin-left: 0px;
+                background-color:#231F20;
+                text-align:center;
+                font-color:white;
+                font-family:Calibri;
+                font-size:20px;
+                padding: 0px;
+                top:0;
+                left:0;
+                z-index:10
+            }
+
+            img
+            {
+                margin-top:6px;
+            }
+            img:hover
+            {
+                border-color:#008cba;
+                transition:0.6s;
+            }
+
+           body
+           {
+               margin:0;
+               margin-top:130px
+           }
+
+           tr
+           {
+                font-family:myfont;
+                color:white;
+           }
+
+           td
+           {
+                font-size:20px;
+                font-family:myfont;
+                padding-top: 30px;
+           }
+
+            tr, td
+            {
+              padding-top: 2px;
+              padding-bottom: 20px;
+              padding-left: 30px;
+              padding-right: 40px;
+            }
+
+
+
+            tr td img:hover
+            {
+                transform:scale(1.05)
+            }
+
+
+            imgheader
+            {
+                margin-top:5px;
+                display:inline-block;
+           }
+
+
+
+        </style>
+    </head>
+<body bgcolor=black>
+    <header>
+        <h1 style="color :White; display:inline-block; margin-left:170px">Movie Description</h1>
+        <a href="/"><button class="button" style="float:right; margin-top:35px; margin-right:80px; display:inline-block; font-size:15px; border-radius:20px">Home</button></a>
+    </header>
+    <table align="center">
+        <tr>
+            <td rowspan="5" style="padding-bottom:0px">
+                <img src={{movie_name[0].poster}}, height = 670px, width = 570px, border = 2px>
+            </td>
+            <td style="padding-bottom:0px; padding-top:10px">
+                <button class="button3">{{movie_name[0].name}}</button>
+            </td>
+        </tr>
+            <td style="padding-bottom:0px; padding-top:0px">
+                {% for g in range(movie_name[0].len_cast) %}
+                            <button class="button">{{movie_name[0].cast[g]}}</button>
+                {% endfor %}
+            </td>
+        <tr>
+            <td style="padding-bottom:0px; padding-top:0px">
+                <button class="button2">{{movie_name[0].description}}</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-bottom:0px; padding-top:0px">
+                {% for g in range(movie_name[0].len) %}
+                    <button class="button">{{movie_name[0].genre[g]}}</button>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td style=" padding-top:0px">
+                <button class="button4">{{movie_name[0].rating}} ⭐</button>
+                <button class="button4">{{movie_name[0].run}}</button>
+                <button class="button4">{{movie_name[0].certificate}}</button>
+                <button class="button4">{{movie_name[0].year}}</button>
+            </td>
+        </tr>
+
+    </table>
+
+    <table align="center"; cellpadding="0px"; >
+        <tr>
+            <td>
+                <br>
+                <h2 align="left">Similar Movies</h2>
+            </td>
+        </tr>
+    </table>
+    <table align="center"; cellpadding="50px";>
+
+                {% set count = namespace(value=0) %}
+                {% for i in range(2) %}
+                    <tr>
+                        {% for i in range(3) %}
+                            <td><a href="/description/{{lists[count.value].index}}" border="0"><img src={{lists[count.value].link}}, height = 500px, width = 400px, border = 0px></a> </td>
+                        {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+    </table>
+
+</body>
+</html>
